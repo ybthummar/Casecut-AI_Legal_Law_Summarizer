@@ -1,5 +1,5 @@
-import LegalSummarizer from "@/components/LegalSummarizer";
+import LegalSummarizerNew from "@/components/LegalSummarizerNew";
 
 export default function HomePage() {
-  return <LegalSummarizer />;
+  return <LegalSummarizerNew />;
 }
