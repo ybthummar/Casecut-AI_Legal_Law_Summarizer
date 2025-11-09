@@ -1,25 +1,24 @@
-# ⚖️ AI-Powered Legal Document Summarizer for Indian Law
+# ⚖️ CaseCut-AI: AI-Powered Legal Document Summarizer for Indian Law
 
-## 🧠 Project Overview
-
-This project is an **AI-based Legal Document Summarization System** designed specifically for **Indian legal judgments and case documents**.  
-It performs **extractive and abstractive summarization**, **IPC clause & section detection**, and provides **AI-based legal suggestions** like law title, punishment, and offense type.
-
-The system helps **judges, lawyers, and law students** to quickly understand lengthy case documents and identify relevant IPC sections.
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-blue)]()
+[![Next.js](https://img.shields.io/badge/Frontend-Next.js-black)]()
+[![Node.js](https://img.shields.io/badge/Backend-Node.js-green)]()
+[![NLP](https://img.shields.io/badge/AI-Legal%20Summarization-orange)]()
 
 ---
 
-## 🚀 Key Features
+## 🧠 Overview
 
-✅ **Upload Legal PDFs** – Upload Indian legal judgments or case documents in PDF format.  
-✅ **Text Extraction** – Automatically extract text using `pdf-parse`.  
-✅ **IPC Section Detection** – Detect Indian Penal Code (IPC) sections with detailed descriptions (law, punishment, and offense type).  
-✅ **Extractive Summarization** – Generates concise summaries highlighting the most important sentences.  
-✅ **Abstractive Summarization** – Rewrites the content in natural, human-like summarized language.  
-✅ **Legal Suggestions** – Provides context-aware legal insights for detected IPC sections.  
-✅ **Evaluation Metrics** – Evaluated using ROUGE, BERTScore, and SummaC consistency metrics.  
-✅ **Frontend Integration (Next.js)** – Intuitive UI to upload files and display summaries.  
-✅ **Backend (Node.js + FastAPI)** – Handles PDF extraction, summarization, and IPC logic.  
+**CaseCut-AI** is an **AI-driven legal document summarization system** designed for Indian court judgments.  
+It performs:
+- 📘 **Extractive Summarization**
+- 📙 **Abstractive Summarization**
+- ⚖️ **IPC Section Detection**
+- 🤖 **Question Answering**
+- 💬 **Hybrid Summarization (Merged Results)**
+
+The system helps law students, judges, and researchers to **quickly understand lengthy legal cases** by generating human-readable summaries and identifying relevant **Indian Penal Code (IPC)** sections automatically.
 
 ---
 
@@ -27,88 +26,140 @@ The system helps **judges, lawyers, and law students** to quickly understand len
 
 ```
 
-📂 CaseCut-AI
+📂 CaseCut-AI_Legal_Law_Summarizer
 │
-├── 📁 backend/
-│   ├── server.js                 # Express server (handles upload, IPC detection, responses)
-│   ├── routes/
-│   │   └── summarizerRoutes.js   # API routes for summarization
-│   ├── controllers/
-│   │   └── summarizerController.js
-│   ├── models/
-│   │   └── ipcrules.json         # Contains IPC sections, titles, punishments
-│   ├── uploads/                  # Temporary PDF storage
-│   └── package.json
-│
-├── 📁 frontend/
+├── client/                        # Next.js Frontend (UI for file upload & results)
+│   ├── app/
 │   ├── components/
-│   │   └── LegalSummarizer.jsx   # UI for upload + displaying summaries
 │   ├── pages/
-│   │   └── index.js              # Entry page
 │   ├── styles/
 │   └── package.json
 │
-├── 📁 models/
-│   ├── fine_tuned_t5_summarizer/      # T5 model folder (extractive/abstractive)
-│   ├── fine_tuned_bart_summarizer/    # BART model
-│   ├── fine_tuned_pegasus_summarizer/ # Pegasus model
-│   ├── sbert_legal/                   # SBERT embedding model
+├── server/                        # Node.js Backend (API layer)
+│   ├── server.js
+│   ├── services/
+│   │   ├── extractiveSummary.js
+│   │   ├── abstractiveSummarizer.js
+│   │   ├── detectIPCSections.js
+│   │   ├── hybridSummarizer.js
+│   │   ├── chunkProcessor.js
+│   │   └── questionAnswering.js
+│   └── package.json
 │
-├── 📁 dataset/
-│   ├── train.csv
-│   ├── test.csv
-│   ├── validation.csv
-│   └── raw_pdfs/
+├── python_scripts/                # ML Inference Scripts (Transformers)
+│   ├── t5_summarizer.py
+│   ├── bart_summarizer.py
+│   ├── pegasus_summarizer.py
+│   ├── led_summarizer.py
+│   └── requirements.txt
 │
-├── requirements.txt
-├── README.md
-└── research_paper_draft.pdf
+├── Model/                         # Local Model Checkpoints
+│   ├── fine_tuned_t5_summarizer/
+│   ├── fine_tuned_bart_summarizer/
+│   ├── fine_tuned_pegasus_summarizer/
+│   ├── legal_sbert_summary_model/
+│   └── LED/
+│
+├── dataset/                       # Legal Datasets
+│   ├── IN-Abs/                    # Abstractive Summarization Dataset
+│   │   ├── train-data/
+│   │   │   ├── judgement/
+│   │   │   ├── summary/
+│   │   │   └── stats-IN-train.txt
+│   │   ├── test-data/
+│   │   │   ├── judgement/
+│   │   │   ├── summary/
+│   │   │   └── stats-IN-test.txt
+│   │   └── README.txt
+│   │
+│   ├── IN-Ext/                    # Extractive Summarization Dataset
+│   │   ├── judgement/
+│   │   ├── summary/
+│   │   │   ├── full/
+│   │   │   │   ├── A1/
+│   │   │   │   └── A2/
+│   │   │   ├── segment-wise/
+│   │   │   │   ├── A1/
+│   │   │   │   └── A2/
+│   │   └── IN-EXT-length.txt
+│
+├── utils/
+│   ├── extractPdfText.js
+│   ├── simpleOCR.js
+│   ├── logger.js
+│   └── ipcrules.json
+│
+├── evaluation/
+│   ├── evaluate_t5.ipynb
+│   ├── evaluate_bart.ipynb
+│   ├── evaluate_pegasus.ipynb
+│   └── metrics_report.csv
+│
+├── tests/
+│   └── api.test.js
+│
+├── api-spec.yaml
+├── LICENSE
+└── README.md
 
 ```
 
 ---
 
-## 🧩 Technologies Used
+## 🧩 Dataset Description
 
-### **Frontend**
-- 🖥️ Next.js / React  
-- ⚡ Tailwind CSS  
-- 📦 Axios for API communication  
+### 🟣 IN-Abs — *Abstractive Summarization Dataset*
+- **Source:** [Liiofindia.org (INSC Cases)](http://www.liiofindia.org/in/cases/cen/INSC/)
+- **Size:** 7,130 (document, summary) pairs  
+  - 7,030 → Training  
+  - 100 → Testing  
+- **Structure:**
+```
 
-### **Backend**
-- 🧩 Node.js (Express) for IPC + PDF handling  
-- 🐍 FastAPI (Python) for ML model inference  
-- 🗃️ pdf-parse for text extraction  
-- ⚙️ RESTful API for communication  
+IN-Abs/
+├── train-data/
+│   ├── judgement/
+│   ├── summary/
+│   └── stats-IN-train.txt
+├── test-data/
+│   ├── judgement/
+│   ├── summary/
+│   └── stats-IN-test.txt
 
-### **AI / NLP Models**
-- 🧠 T5 (Text-to-Text Transfer Transformer)  
-- 🧠 BART (Bidirectional Auto-Regressive Transformer)  
-- 🧠 Pegasus (Pre-trained for summarization tasks)  
-- 🔍 SBERT (Sentence-BERT) for semantic similarity  
-- 🧾 ROUGE, BERTScore, SummaC for evaluation  
+```
+
+Each summary is a **human-written abstractive summary** emphasizing **clarity, coherence, and factual correctness.**
 
 ---
 
-## 🗂️ Dataset
+### 🟢 IN-Ext — *Extractive Summarization Dataset*
+- Contains 50 Indian Supreme Court case documents  
+- Each summarized by **two law experts (A1, A2)**  
+- Two summary types:  
+- **Full:** Continuous, coherent summary  
+- **Segment-wise:** Divided into `facts`, `arguments`, `analysis`, `judgment`, `statute`
 
-You can use:
-- **Indian Kanoon** judgments dataset (scraped)
-- **Manually labeled 100+ PDFs** for custom summarization
-- **CSV format:**
+**Structure:**
 ```
 
-
+IN-Ext/
+├── judgement/
+├── summary/
+│   ├── full/
+│   │   ├── A1/
+│   │   └── A2/
+│   ├── segment-wise/
+│   │   ├── A1/
+│   │   └── A2/
+└── IN-EXT-length.txt
 
 ````
 
-> 📘 Tip: Each row represents one legal case document with reference summaries.
-
 ---
 
-## ⚙️ Installation Steps
+## ⚙️ Installation & Setup
 
-### 1️⃣ Clone Repository
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/<your-username>/CaseCut-AI.git
 cd CaseCut-AI
@@ -117,7 +168,7 @@ cd CaseCut-AI
 ### 2️⃣ Backend Setup
 
 ```bash
-cd backend
+cd server
 npm install
 node server.js
 ```
@@ -125,32 +176,30 @@ node server.js
 ### 3️⃣ Frontend Setup
 
 ```bash
-cd frontend
+cd client
 npm install
 npm run dev
 ```
 
-### 4️⃣ Python Model Server (FastAPI)
+### 4️⃣ Python Model Environment
 
 ```bash
-cd models
-pip install -r ../requirements.txt
+cd python_scripts
+pip install -r requirements.txt
 uvicorn app:app --reload
 ```
 
 ---
 
-## 🧮 Evaluation
+## 🧮 Evaluation Metrics
 
-The summarization models are evaluated using:
+| Metric                | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| **ROUGE-1 / ROUGE-L** | Measures lexical overlap with human summaries           |
+| **BERTScore**         | Semantic similarity using contextual embeddings         |
+| **SummaC**            | Checks factual consistency between summary and document |
 
-| Metric                | Description                                                        |
-| --------------------- | ------------------------------------------------------------------ |
-| **ROUGE-1 / ROUGE-L** | Measures lexical overlap between generated and reference summaries |
-| **BERTScore**         | Evaluates semantic similarity using contextual embeddings          |
-| **SummaC**            | Checks factual consistency of generated summaries                  |
-
-Example evaluation command:
+Run:
 
 ```bash
 python evaluate_t5.ipynb
@@ -158,9 +207,9 @@ python evaluate_t5.ipynb
 
 ---
 
-## 📜 Example Output
+## 📊 Example Output
 
-**Input PDF:** *State vs Ram Kumar (IPC 302, 307)*
+**Input:** `State vs Ram Kumar (IPC 302, 307)`
 
 **Detected IPCs:**
 
@@ -181,62 +230,52 @@ python evaluate_t5.ipynb
 
 **Extractive Summary:**
 
-> The accused, Ram Kumar, was charged under IPC 302 and 307 for causing fatal injuries...
+> The accused, Ram Kumar, was charged under IPC 302 and 307 for causing fatal injuries to the victim...
 
 **Abstractive Summary:**
 
-> Ram Kumar was found guilty of murder and attempted murder, facing life imprisonment under IPC 302 and 307.
+> Ram Kumar was found guilty of murder and attempted murder under IPC 302 and 307, resulting in life imprisonment.
 
 ---
 
-## 📊 Research Paper Scope
+## 👩‍💻 Authors
 
-### Title:
+| Name               | Role                         | Work                                         |
+| ------------------ | ---------------------------- | -------------------------------------------- |
+| **Yug Thummar**    | Student ML Engineer          | Dataset creation, model training, evaluation |
+| **Dhwani Navadia** | Student Full Stack Developer | Backend + Frontend Integration, UI design    |
 
-**“A Comparative Study of Summarization Techniques for Indian Legal Documents”**
-
-### Key Sections:
-
-* Abstract
-* Introduction to Legal NLP
-* Dataset Collection
-* Extractive vs. Abstractive Techniques
-* Model Training & Evaluation
-* Results & Comparative Analysis
-* Conclusion & Future Work
+> 🎓 *This project was developed as part of an academic semester research under the theme “AI-Powered Legal Document Analysis.”*
 
 ---
 
-## 🧠 Future Enhancements
+## 🧠 Research Context
 
-* ✅ Add multilingual (Hindi/English) summarization
-* ✅ Integrate judgment prediction using classification
-* ✅ Build case-law recommendation system
-* ✅ Deploy full-stack app on AWS / Render
+**Title:**
+📄 *A Comparative Study of Summarization Techniques for Indian Legal Documents*
 
----
+**Focus Areas:**
 
-## 👨‍💻 Contributors
-
-| Name                     | Role                 | Work                                |
-| ------------------------ | -------------------- | ----------------------------------- |
-| **Yug Thummar**          | ML Engineer          | Dataset, model training, evaluation |
-| **Dhwani Navadia**       | Full Stack Developer | Backend + Frontend Integration      |
+* Extractive vs Abstractive Summarization
+* Legal Domain Adaptation of T5, BART, Pegasus, SBERT
+* ROUGE & BERTScore Evaluation
+* IPC Section Detection Automation
 
 ---
 
-## 📄 License
+## 🔮 Future Scope
 
-This project is licensed under the **MIT License** — you are free to use, modify, and distribute with attribution.
-
----
-
-## 🏁 Acknowledgments
-
-* Hugging Face Transformers
-* Indian Kanoon for public legal data
-* ROUGE, BERTScore, and SummaC authors for open evaluation tools
+* Multilingual summarization (Hindi-English)
+* Judgment prediction from summaries
+* Case-law recommendation engine
+* Model optimization for on-device inference
 
 ---
 
-> 💬 *"Bringing AI to Indian Judiciary — simplifying justice through automation."*
+## 📜 License
+
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
+
+---
+
+> ⚖️ *“Simplifying Indian legal understanding through responsible AI.”*
